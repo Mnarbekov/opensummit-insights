@@ -68,6 +68,13 @@
   });
 
   ticks.forEach((tick) => tick.addEventListener('click', () => go(Number(tick.dataset.slide))));
+  document.querySelectorAll('.see-slide').forEach((link) => {
+    link.addEventListener('click', () => {
+      go(Number(link.dataset.slide));
+      const panel = document.querySelector('.media-panel');
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
   openButton.addEventListener('click', openLightbox);
   closeButton.addEventListener('click', closeLightbox);
 
