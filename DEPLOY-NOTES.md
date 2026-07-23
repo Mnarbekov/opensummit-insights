@@ -8,7 +8,7 @@ Date: 2026-07-23
 - Branch: main
 - Deploy model: GitHub Actions auto-deploy using Azure/static-web-apps-deploy@v1
 - Workflow: .github\workflows\azure-static-web-apps-opensummit-insights.yml
-- App root: /
+- App root: /site (keeps repo docs/dotfiles out of deployed artifact; deployed payload contains only index.html, style.css, script.js, and assets\\slides\\*.JPEG)
 - API location: empty
 - Output location: empty
 - Build: skipped (pure static)
@@ -29,22 +29,14 @@ Date: 2026-07-23
   - Name: opensummitai2026
   - Target/value: salmon-pebble-0da68e600.7.azurestaticapps.net
   - Proxy status: DNS only / grey cloud (not proxied)
-- Status 2026-07-23: pending manual Cloudflare DNS creation. Local Cloudflare API/tool credentials were not available.
-- Azure command to run after the CNAME exists:
-
-```powershell
-az staticwebapp hostname set -n opensummit-insights -g rg-opensummit-insights --hostname opensummitai2026.mikhailnarbekov.com --validation-method cname-delegation
-az staticwebapp hostname show -n opensummit-insights -g rg-opensummit-insights --hostname opensummitai2026.mikhailnarbekov.com -o table
-```
-
-Attempted before DNS existed; Azure returned: `CNAME Record is invalid. Please ensure the CNAME record has been created.`
+- Status 2026-07-23: Cloudflare CNAME added DNS-only/grey cloud; Azure custom domain status Ready. Public resolvers return the CNAME. Local router DNS may briefly cache the earlier NXDOMAIN until propagation/negative cache expiry.
 
 ## Redeploy procedure
 1. Edit files in `C:\DataCells\opensummit-insights`.
 2. Commit changes to `main`.
 3. Push to GitHub: `git push origin main`.
 4. GitHub Actions deploys automatically to Azure Static Web Apps.
-5. Verify: `curl.exe -L -s -o NUL -w "%{http_code}" https://salmon-pebble-0da68e600.7.azurestaticapps.net`.
+5. Verify: `curl.exe -L -s -o NUL -w "%{http_code}" https://salmon-pebble-0da68e600.7.azurestaticapps.net` and `curl.exe -I https://opensummitai2026.mikhailnarbekov.com`.
 
 ## Shipped content
 Only these site assets are shipped:
@@ -56,3 +48,4 @@ Only these site assets are shipped:
 Excluded from the repo/deploy:
 - `_selfcheck\`
 - `assets\video\`
+
