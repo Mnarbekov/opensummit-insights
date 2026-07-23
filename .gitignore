@@ -1,0 +1,12 @@
+# Local/self-check artifacts
+_selfcheck/
+site_selfcheck/
+**/_selfcheck/
+
+# Unshipped media
+assets/video/
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
