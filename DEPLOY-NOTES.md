@@ -29,7 +29,7 @@ Date: 2026-07-23
   - Name: opensummitai2026
   - Target/value: salmon-pebble-0da68e600.7.azurestaticapps.net
   - Proxy status: DNS only / grey cloud (not proxied)
-- Status 2026-07-23: Cloudflare CNAME added DNS-only/grey cloud; Azure custom domain status Ready. Public resolvers return the CNAME. Local router DNS may briefly cache the earlier NXDOMAIN until propagation/negative cache expiry.
+- Status 2026-07-23: Cloudflare CNAME added DNS-only/grey cloud; Azure custom domain status Ready; DNS propagated; HTTPS returns 200 with a valid managed certificate.
 
 ## Redeploy procedure
 1. Edit files in `C:\DataCells\opensummit-insights`.
@@ -48,4 +48,5 @@ Only these site assets are shipped:
 Excluded from the repo/deploy:
 - `_selfcheck\`
 - `assets\video\`
+
 
